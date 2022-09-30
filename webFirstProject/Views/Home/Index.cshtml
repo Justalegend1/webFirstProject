@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Конвертация долларов в рубли";
+}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $.getJSON("https://www.cbr-xml-daily.ru/daily_json.js", function(data) {
+    $('#eur').html(data.Valute.EUR.Nominal+" Евро = "+ data.Valute.EUR.Value+" Рублей");
+});
+</script>*@
+
+
+</body>
+
+</html>
+
+<body>
+    <h1>Конвертер валют</h1>
+    <style type = "text/css">
+        caption{
+        caption-side:top;
+        color: black;
+        margin-bottom: -15px;
+        }
+    </style>
+    <table border = "1">
+        <caption>Курс валют</caption>
+           <tr>
+               <td id = "usd">
+    USD
+               </td> 
+               <td>58.1006</td>
+               </tr>
+               <tr>
+               <td>
+    EUR
+               </td>
+               <td>56.4751</td>
+           </tr>
+       
+        </table>
+        <p></p>
+    <script>
+window.onload = function () {
+    let c = {'USD':'58.1006', 'EUR':'56.4751', 'RUB':'1'}; 
+
+    let val = document.getElementById('val'); 
+    let currency1 = document.getElementById('cur1'); 
+    let currency2 = document.getElementById('cur2'); 
+    let result = document.getElementsByClassName('convert_result')[0]; 
+    function summ() {
+        let z = 0;
+        let y = 0;
+        if(currency1.value === currency2.value){ 
+            result.innerText = val.value; 
+        } else {
+                z = val.value*c[currency1.value]; // тот, из которого конвертируем в рублях
+                y = (c[currency2.value]*val.value);//тот, в который конвертируем
+                result.innerHTML = ((((z/y)*val.value)*100)/100).toFixed(4);
+        }
+    }
+    val.oninput = function () { 
+        summ(); 
+    };
+    currency1.onchange = function () { 
+        summ();
+    };
+    currency2.onchange = function () { 
+        summ();
+    }
+}
+</script>
+<form>
+<div class="convert_block_item">
+    <input type="number" id="val" placeholder="Введите сумму..."/>
+    <select id="cur1">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>RUB</option>
+    </select>
+</div>
+<div class="convert_block_item">
+    <div class="convert_result">= 00,000</div>
+    <select id="cur2">
+        <option>USD</option>
+        <option>EUR</option>
+        <option>RUB</option>
+    </select>
+</div>
+</form>
+<table>
+
+</table>
+</body>
